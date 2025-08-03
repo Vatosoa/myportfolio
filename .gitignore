@@ -1,1 +1,10 @@
 /.vscode
+/blog/__pycache__
+/blog/migrations/__pycache__
+/contact/__pycache__
+/contact/migrations/__pycache__
+/core/__pycache__
+/core/migrations/__pycache__
+/portfolio_site/__pycache__
+/projects/__pycache__
+/projects/migrations/__pycache__

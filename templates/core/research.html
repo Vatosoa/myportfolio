@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Research & Interests" %}{% endblock %}
+{% block content %}
+<section class="my-12">
+  <h2 class="text-3xl font-bold mb-4">{% trans "Research Topics" %}</h2>
+  <ul class="list-disc ml-6 text-lg">
+    <li>{% trans "Natural Language Processing (NLP) in low-resource languages" %}</li>
+    <li>{% trans "Semantic search and knowledge representation" %}</li>
+    <li>{% trans "Odoo framework and business automation" %}</li>
+    <li>{% trans "Python backend architecture and system design" %}</li>
+  </ul>
+</section>
+{% endblock %}

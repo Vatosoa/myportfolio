@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Home" %}{% endblock %}
+{% block content %}
+  <section class="my-12">
+    <h2 class="text-3xl font-bold mb-4">{% trans "Hi, I'm Vatosoa Razafindrazaka" %}</h2>
+    <p class="mb-2">{% trans "Python Developer | Odoo Expert | AI Researcher" %}</p>
+    <a href="/about/" class="bg-blue-600 text-white px-4 py-2 rounded">{% trans "Learn more" %}</a>
+  </section>
+{% endblock %}
