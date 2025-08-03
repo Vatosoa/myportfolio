@@ -2,9 +2,14 @@
 {% load i18n %}
 {% block title %}{% trans "Home" %}{% endblock %}
 {% block content %}
-  <section class="my-12">
-    <h2 class="text-3xl font-bold mb-4">{% trans "Hi, I'm Vatosoa Razafindrazaka" %}</h2>
-    <p class="mb-2">{% trans "Python Developer | Odoo Expert | AI Researcher" %}</p>
-    <a href="/about/" class="bg-blue-600 text-white px-4 py-2 rounded">{% trans "Learn more" %}</a>
+  <section class="my-12 flex flex-col md:flex-row items-center gap-8">
+    <div class="md:w-1/2">
+      <img src="/static/images/vatosoa.jpg" alt="Portrait of Vatosoa" class="rounded-lg shadow-md">
+    </div>
+    <div class="md:w-1/2">
+      <h2 class="text-3xl font-bold mb-4">{% trans "Hi, I'm Vatosoa Razafindrazaka" %}</h2>
+      <p class="mb-2">{% trans "Python Developer | Odoo Expert | AI Researcher" %}</p>
+      <a href="{% url 'about' %}" class="bg-blue-600 text-white px-4 py-2 rounded">{% trans "Learn more" %}</a>
+    </div>
   </section>
 {% endblock %}

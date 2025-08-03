@@ -11,12 +11,14 @@
   <header class="p-4 flex justify-between items-center">
     <h1 class="text-2xl font-bold">Vatosoa Razafindrazaka</h1>
     <nav class="space-x-4">
-        <a href="/en/" class="text-blue-700 hover:underline">Home</a>
-        <a href="/en/research/" class="text-blue-700 hover:underline">Research</a>
-        <a href="/en/publications/" class="text-blue-700 hover:underline">Publications</a>
-        <a href="/en/about/" class="text-blue-700 hover:underline">About</a>
-        <a href="/en/contact/" class="text-blue-700 hover:underline">Contact</a>
-        <a href="/en/cv/" class="text-blue-700 hover:underline">CV</a>
+        <a href="{% url 'home' %}" class="text-blue-700 hover:underline">{% trans "Home" %}</a>
+        <a href="{% url 'research' %}" class="text-blue-700 hover:underline">{% trans "Research" %}</a>
+        <a href="{% url 'about' %}" class="text-blue-700 hover:underline">{% trans "About" %}</a>
+        <a href="{% url 'publications' %}" class="text-blue-700 hover:underline">{% trans "Publications" %}</a>
+        <a href="{% url 'projects' %}" class="text-blue-700 hover:underline">{% trans "Projects" %}</a>
+        <a href="{% url 'blog' %}" class="text-blue-700 hover:underline">{% trans "Blog" %}</a>
+        <a href="{% url 'contact' %}" class="text-blue-700 hover:underline">{% trans "Contact" %}</a>
+        <a href="{% url 'cv' %}" class="text-blue-700 hover:underline">{% trans "CV" %}</a>
     </nav>
     <form action="/i18n/setlang/" method="post">{% csrf_token %}
       <select name="language" onchange="this.form.submit()">
@@ -26,16 +28,27 @@
     </form>
   </header>
   <main class="flex-grow container mx-auto px-4">
-    {% block content %}{% endblock %}
+    {% block content %}
+    <section class="my-12 flex flex-col md:flex-row items-center gap-8">
+      <div class="md:w-1/2">
+        <img src="/static/images/vatosoa.jpg" alt="Portrait of Vatosoa" class="rounded-lg shadow-md">
+      </div>
+      <div class="md:w-1/2">
+        <h2 class="text-3xl font-bold mb-4">{% trans "Hi, I'm Vatosoa Razafindrazaka" %}</h2>
+        <p class="mb-2">{% trans "Python Developer | Odoo Expert | AI Researcher" %}</p>
+        <a href="{% url 'about' %}" class="bg-blue-600 text-white px-4 py-2 rounded">{% trans "Learn more" %}</a>
+      </div>
+    </section>
+    {% endblock %}
   </main>
   <footer class="bg-gray-900 text-white mt-12">
     <div class="container mx-auto px-4 py-6 text-sm flex flex-col md:flex-row justify-between items-center">
         <p>&copy; {{ now|date:'Y' }} Vatosoa Razafindrazaka. {% trans "All rights reserved." %}</p>
         <div class="mt-2 md:mt-0 flex space-x-4">
-        <a href="https://github.com/yourusername" target="_blank" class="hover:underline">GitHub</a>
+        <a href="https://github.com/Vatosoa" target="_blank" class="hover:underline">GitHub</a>
         <a href="https://scholar.google.com" target="_blank" class="hover:underline">Google Scholar</a>
-        <a href="/en/cv/" class="hover:underline">{% trans "CV" %}</a>
-        <a href="/en/contact/" class="hover:underline">{% trans "Contact" %}</a>
+        <a href="{% url 'cv' %}" class="hover:underline">{% trans "CV" %}</a>
+        <a href="{% url 'contact' %}" class="hover:underline">{% trans "Contact" %}</a>
         </div>
     </div>
   </footer>

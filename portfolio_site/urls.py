@@ -23,7 +23,8 @@ from django.utils import translation
 from django.conf import settings
 
 def redirect_to_language(request):
-    return HttpResponseRedirect(f'/{settings.LANGUAGE_CODE}/')
+    lang = translation.get_language_from_request(request, check_path=False)
+    return HttpResponseRedirect(f'/{lang}/')
 
 # Redirige automatiquement vers /en/ ou /fr/ selon la langue du navigateur
 # def redirect_to_language(request):
