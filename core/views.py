@@ -20,3 +20,9 @@ def publications(request):
 def cv(request):
     return render(request, 'core/cv.html', { 'now': now() })
 
+def projects(request):
+    return render(request, 'core/projects.html', { 'now': now() })
+
+def blog(request):
+    return render(request, 'core/blog.html', { 'now': now() })
+
