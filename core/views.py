@@ -25,4 +25,3 @@ def projects(request):
 
 def blog(request):
     return render(request, 'core/blog.html', { 'now': now() })
-

@@ -9,3 +9,5 @@
 /projects/__pycache__
 /projects/migrations/__pycache__
 /locale/fr/LC_MESSAGES
+myporfolio/lib
+portfolio_site/lib
