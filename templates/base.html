@@ -48,7 +48,11 @@
 
       <!-- Navbar -->
       <nav class="space-y-2 w-full flex flex-col items-center">
+        {% if LANGUAGE_CODE == 'fr' %}
+        <a href="{% url 'about' %}" class="flex items-center hover:underline">{% trans "A propos" %}.</a>
+        {% else %}
         <a href="{% url 'about' %}" class="flex items-center hover:underline">{% trans "About" %}.</a>
+        {% endif %}
         <a href="{% url 'experience' %}" class="flex items-center hover:underline">{% trans "Experience" %}.</a>
         <a href="{% url 'projects' %}" class="flex items-center hover:underline">{% trans "Projects" %}.</a>
         <a href="{% url 'publications' %}" class="flex items-center hover:underline">{% trans "Publications" %}.</a>

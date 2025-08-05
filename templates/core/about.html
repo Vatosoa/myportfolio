@@ -4,6 +4,7 @@
 {% block content %}
 <section class="my-12">
   <div class="flex flex-col text-justify relative ml-20 mr-20">
+    {% if LANGUAGE_CODE == 'fr' %}
     Je suis développeur Odoo Python avec plus d'un an d'expérience.
     J'ai travaillé sur différentes parties du système,
     notamment le backend (modèles Python, contrôleurs) et le frontend (vues XML, JavaScript, OWL).
@@ -20,6 +21,25 @@
     En dehors du travail, je suis impliqué dans des projets bénévoles, notamment l'organisation d'événements
     scientifiques. Je suis quelqu'un qui s'adapte rapidement aux nouveaux environnements et qui aime apprendre en
     permanence, ce qui me permet de m'améliorer et de rester à jour avec les dernières technologies
+    
+    {% else %}
+    I'm an Odoo Python developer with over a year's experience.
+    I've worked on various parts of the system,
+    including the backend (Python templates, controllers) and the frontend (XML views, JavaScript, OWL).
+    I have significant experience in customizing modules such as sales, purchasing, accounting,
+    and in generating reports (invoices, credit notes, etc.).
+    <br><br>
+    My expertise also includes integrating APIs to improve automation processes,
+    as well as modifying the Odoo website to meet specific customer needs.
+    <br><br>
+    I have a master's degree in computer science from the Ecole Nationale d'Informatique de Madagascar,
+    with a research project focusing on AI and deep learning applied to natural language processing in
+    Malagasy.
+    <br><br>
+    Outside of work, I'm involved in volunteer projects, including organizing events
+    scientific. I'm someone who adapts quickly to new environments and likes to learn by
+    constantly, which enables me to improve and stay up to date with the latest technologies.
+    {% endif %}
   </div>
 </section>
 {% endblock %}
