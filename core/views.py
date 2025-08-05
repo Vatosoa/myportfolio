@@ -2,9 +2,6 @@ from django.shortcuts import render
 from django.utils.translation import gettext as _
 from django.utils.timezone import now  # pour automatiser l'année
 
-def home(request):
-    return render(request, 'core/home.html', { 'now': now() })
-
 def about(request):
     return render(request, 'core/about.html', { 'now': now() })
 

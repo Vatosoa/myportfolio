@@ -1,9 +1,25 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% block title %}{% trans "About Me" %}{% endblock %}
+{% block title %}{% trans "VR" %}{% endblock %}
 {% block content %}
-  <section class="my-12">
-    <h2 class="text-3xl font-bold mb-4">{% trans "About Me" %}</h2>
-    <p>{% trans "I'm a Python developer with a passion for building robust web applications using Django and Odoo." %}</p>
-  </section>
+<section class="my-12">
+  <div class="flex flex-col text-justify relative ml-20 mr-20">
+    Je suis développeur Odoo Python avec plus d'un an d'expérience.
+    J'ai travaillé sur différentes parties du système,
+    notamment le backend (modèles Python, contrôleurs) et le frontend (vues XML, JavaScript, OWL).
+    J'ai une expérience significative dans la personnalisation de modules comme les ventes, les achats, la comptabilité,
+    et dans la génération de rapports (factures, avoirs, etc.).
+    <br><br>
+    Mon expertise comprend également l'intégration d'APIs pour améliorer les processus d'automatisation,
+    ainsi que la modification du site web d'Odoo pour répondre aux besoins spécifiques des clients.
+    <br><br>
+    J'ai un diplôme de master en informatique de l'Ecole Nationale d'Informatique de Madagascar,
+    avec un projet de recherche portant sur l'IA et le deep learning appliqué au traitement du langage naturel en
+    malgache.
+    <br><br>
+    En dehors du travail, je suis impliqué dans des projets bénévoles, notamment l'organisation d'événements
+    scientifiques. Je suis quelqu'un qui s'adapte rapidement aux nouveaux environnements et qui aime apprendre en
+    permanence, ce qui me permet de m'améliorer et de rester à jour avec les dernières technologies
+  </div>
+</section>
 {% endblock %}
