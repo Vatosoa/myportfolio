@@ -11,9 +11,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <script src="https://unpkg.com/feather-icons"></script>
+  <!-- Lien vers le fichier JavaScript -->
+  <script src="{% static 'js/scripts_nav.js' %}"></script>
 </head>
 <body class="flex flex-col min-h-screen bg-gray-100 text-gray-900 font-[Inter]" style="font-family: 'Manrope', sans-serif;">
-  <header class="p-4 flex justify-between items-center">
+  <header class="p-4 flex justify-between items-center fixed top-0 left-0 w-full">
     <!-- Sélection de la langue en haut à droite -->
     <form action="/i18n/setlang/" method="post">{% csrf_token %}
       <select name="language" onchange="this.form.submit()" class="absolute top-4 right-4">
@@ -26,10 +28,11 @@
   <div class="flex flex-col md:flex-row">
     <!-- Sidebar à gauche avec image, description et réseaux sociaux -->
     <!-- <aside class="bg-gray-800 text-gray-700 p-6 flex flex-col items-center" style="width: 100%; max-width: 400px;"> -->
-    <aside class="text-gray-700 p-6 flex flex-col items-center"
-      style="width: 100%; max-width: 450px;height: 90vh;">
+    <aside class="text-gray-700 p-6 flex flex-col items-center fixed top-0 left-0 z-50"
+      style="width: 100%; max-width: 450px;height: 100vh; overflow-y: auto;">
     <!-- <aside class="bg-gray-800 text-gray-700 p-6 flex flex-col items-center"
       style="width: 100%; max-width: 450px;height: 100vh;"> -->
+      <br><br>
       <!-- Image et cercles animés -->
       <div class="w-32 h-32 rounded-full border-2 border-gray-400 flex items-center justify-center relative shadow-xl mb-4 mt-0">
         <!-- L'image au centre -->
@@ -49,16 +52,16 @@
       <!-- Navbar -->
       <nav class="space-y-2 w-full flex flex-col items-center">
         {% if LANGUAGE_CODE == 'fr' %}
-        <a href="{% url 'about' %}" class="flex items-center hover:underline">{% trans "A propos" %}.</a>
+        <a href="#about" class="navbar-link flex items-center">{% trans "A propos" %}.</a>
         {% else %}
-        <a href="{% url 'about' %}" class="flex items-center hover:underline">{% trans "About" %}.</a>
+        <a href="#about" class="navbar-link flex items-center">{% trans "About" %}.</a>
         {% endif %}
-        <a href="{% url 'experience' %}" class="flex items-center hover:underline">{% trans "Experience" %}.</a>
-        <a href="{% url 'projects' %}" class="flex items-center hover:underline">{% trans "Projects" %}.</a>
-        <a href="{% url 'publications' %}" class="flex items-center hover:underline">{% trans "Publications" %}.</a>
-        <a href="{% url 'cv' %}" class="flex items-center hover:underline">{% trans "CV" %}.</a>
+        <a href="#experience" class="navbar-link flex items-center">{% trans "Experience" %}.</a>
+        <a href="#projects" class="navbar-link flex items-center">{% trans "Projects" %}.</a>
+        <a href="#publications" class="navbar-link flex items-center">{% trans "Publications" %}.</a>
+        <a href="#cv" class="navbar-link flex items-center">{% trans "CV" %}.</a>
       </nav>
-
+      
       <!-- Réseaux sociaux -->
       <div class="flex space-x-6 text-gray-700 mt-6">
         <a href="https://github.com/Vatosoa" target="_blank" aria-label="GitHub" class="text-gray-600 hover:text-gray-900 transition-opacity duration-300 opacity-70 hover:opacity-100">
@@ -93,7 +96,7 @@
     </aside>
 
     <!-- Contenu principal à droite -->
-    <main class="flex-grow container mx-auto px-4">
+    <main class="flex-grow container mx-auto px-4" style="margin-left: 450px;">
       {% block content %}
       <section class="my-12 flex flex-col md:flex-row items-center gap-8">
         <div class="md:w-1/2">
@@ -115,17 +118,37 @@
         <div class="mt-2 md:mt-0 flex space-x-4">
         <a href="https://github.com/Vatosoa" target="_blank" class="hover:underline">GitHub</a>
         <a href="https://scholar.google.com" target="_blank" class="hover:underline">Google Scholar</a>
-        <a href="{% url 'cv' %}" class="hover:underline">{% trans "CV" %}</a>
+        <a href="#cv" class="hover:underline">{% trans "CV" %}</a>
         </div>
     </div>
   </footer> -->
 
   <style>
+    /* Effet au survol : texte noir et souligné */
+    .navbar-link:hover {
+      text-decoration: underline;
+      color: black; /* Couleur noire au survol */
+    }
+
+    /* Style de l'élément actif : texte noir, souligné et en gras */
+    .navbar-link.active {
+      color: black;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    /* Par défaut, le texte des liens est noir */
+    .navbar-link {
+      color: gray; /* Couleur par défaut du texte */
+    }
+
+    /* Animation de rotation lente pour les cercles */
     @keyframes spin-slow {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
 
+    /* Appliquer l'animation de rotation lente */
     .animate-spin-slow {
       animation: spin-slow 10s linear infinite;
     }

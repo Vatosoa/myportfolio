@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 {% block title %}{% trans "VR" %}{% endblock %}
 {% block content %}
-<section class="my-12">
+
+<!-- About Section -->
+<section id="about" class="my-16">
+  <h2 class="text-3xl font-bold mb-6 ml-20">{% if LANGUAGE_CODE == 'fr' %}À propos{% else %}About{% endif %}</h2>
   <div class="flex flex-col text-justify relative ml-20 mr-20">
     {% if LANGUAGE_CODE == 'fr' %}
     Je suis développeur Odoo Python avec plus d'un an d'expérience.
@@ -42,4 +46,8 @@
     {% endif %}
   </div>
 </section>
+{% include 'core/experience.html' %}
+{% include 'core/projects.html' %}
+{% include 'core/publications.html' %}
+{% include 'core/cv.html' %}
 {% endblock %}

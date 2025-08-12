@@ -1,19 +1,17 @@
-{% extends 'base.html' %}
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
-{% block title %}{% trans "Curriculum Vitae" %}{% endblock %}
-{% block content %}
-<section class="my-12">
-  <h2 class="text-3xl font-bold mb-4">{% trans "Download My CV" %}</h2>
-  <p class="mb-4">{% trans "Click the link below to download a full copy of my CV." %}</p>
-  {% if LANGUAGE_CODE == 'fr' %}
-    <a href="/static/pdf/CV-Vatosoa-Razafindrazaka.pdf" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800">
-      {% trans "Télécharger CV (PDF)" %}
-    </a>
-  {% else %}
-    <a href="/static/pdf/Resume-Vatosoa-Razafindrazaka.pdf" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800">
-      {% trans "Download CV (PDF)" %}
-    </a>
-  {% endif %}
+<section id="cv" class="my-16">
+  <h2 class="text-3xl font-bold mb-6 ml-20">{% trans "Download My CV" %}</h2>
+  <div class="ml-20 mr-20">
+    <p class="mb-4">{% trans "Click the link below to download a full copy of my CV." %}</p>
+    {% if LANGUAGE_CODE == 'fr' %}
+      <a href="/static/pdf/CV-Vatosoa-Razafindrazaka.pdf" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800">
+        {% trans "Télécharger CV (PDF)" %}
+      </a>
+    {% else %}
+      <a href="/static/pdf/Resume-Vatosoa-Razafindrazaka.pdf" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800">
+        {% trans "Download CV (PDF)" %}
+      </a>
+    {% endif %}
+  </div>
 </section>
-{% endblock %}

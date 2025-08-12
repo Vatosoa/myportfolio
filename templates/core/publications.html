@@ -1,16 +1,14 @@
-{% extends 'base.html' %}
 {% load i18n %}
-{% block title %}{% trans "Publications" %}{% endblock %}
-{% block content %}
-<section class="my-12">
-  <h2 class="text-3xl font-bold mb-4">{% trans "Selected Publications" %}</h2>
-  <ul class="space-y-4">
-    <li>
-      <strong>Razafindrazaka, V.</strong> {% trans "(2025). Part-of-Speech Tagging To Sentence Structure in Malagasy." %} <em>ICRAIS 2025</em>.
-    </li>
-    <li>
-      <strong>Razafindrazaka, V., & Rakoto, H.</strong> {% trans "(2024). Building a Bilingual Chatbot for Malagasy-French." %} <em>ACL Workshop</em>.
-    </li>
-  </ul>
+<section id="publications" class="my-16">
+  <h2 class="text-3xl font-bold mb-6 ml-20">{% trans "Selected Publications" %}</h2>
+  <div class="ml-20 mr-20">
+    <ul class="space-y-4">
+      <li>
+        <strong>Razafindrazaka, V.</strong> {% trans "(2025). Part-of-Speech Tagging To Sentence Structure in Malagasy." %} <em>ICRAIS 2025</em>.
+      </li>
+      <li>
+        <strong>Razafindrazaka, V., & Rakoto, H.</strong> {% trans "(2024). Building a Bilingual Chatbot for Malagasy-French." %} <em>ACL Workshop</em>.
+      </li>
+    </ul>
+  </div>
 </section>
-{% endblock %}
