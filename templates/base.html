@@ -17,8 +17,16 @@
 <body class="flex flex-col min-h-screen bg-gray-100 text-gray-900 font-[Inter]" style="font-family: 'Manrope', sans-serif;">
   <header class="p-4 flex justify-between items-center fixed top-0 left-0 w-full">
     <!-- Sélection de la langue en haut à droite -->
-    <form action="/i18n/setlang/" method="post">{% csrf_token %}
+    {% comment %} <form action="/i18n/setlang/" method="post">{% csrf_token %}
       <select name="language" onchange="this.form.submit()" class="absolute top-4 right-4">
+        <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>EN</option>
+        <option value="fr" {% if LANGUAGE_CODE == 'fr' %}selected{% endif %}>FR</option>
+      </select>
+    </form> {% endcomment %}
+    <form action="{% url 'set_language' %}" method="post" class="absolute top-4 right-4">
+      {% csrf_token %}
+      <input name="next" type="hidden" value="{{ request.get_full_path }}" />
+      <select name="language" onchange="this.form.submit()" class="border border-gray-300 rounded px-2 py-1 bg-white">
         <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>EN</option>
         <option value="fr" {% if LANGUAGE_CODE == 'fr' %}selected{% endif %}>FR</option>
       </select>
@@ -96,19 +104,22 @@
     </aside>
 
     <!-- Contenu principal à droite -->
-    <main class="flex-grow container mx-auto px-4" style="margin-left: 450px;">
-      {% block content %}
-      <section class="my-12 flex flex-col md:flex-row items-center gap-8">
-        <div class="md:w-1/2">
-          <img src="/static/images/vatosoa.jpg" alt="Portrait of Vatosoa" class="rounded-lg shadow-md">
-        </div>
-        <div class="md:w-1/2">
-          <h2 class="text-3xl font-bold mb-4">{% trans "Hi, I'm Vatosoa Razafindrazaka" %}</h2>
-          <p class="mb-2">{% trans "Python Developer | Odoo Expert | AI Researcher" %}</p>
-          <a href="{% url 'about' %}" class="bg-blue-600 text-white px-4 py-2 rounded">{% trans "Learn more" %}</a>
-        </div>
-      </section>
-      {% endblock %}
+    <main class="flex-grow container mx-auto px-4" style="margin-left: 450px;" id="main-content">
+      <div class="mouse-gradient" id="mouse-gradient"></div>
+      <div class="content-wrapper">
+        {% block content %}
+        <section class="my-12 flex flex-col md:flex-row items-center gap-8">
+          <div class="md:w-1/2">
+            <img src="/static/images/vatosoa.jpg" alt="Portrait of Vatosoa" class="rounded-lg shadow-md">
+          </div>
+          <div class="md:w-1/2">
+            <h2 class="text-3xl font-bold mb-4">{% trans "Hi, I'm Vatosoa Razafindrazaka" %}</h2>
+            <p class="mb-2">{% trans "Python Developer | Odoo Expert | AI Researcher" %}</p>
+            <a href="{% url 'about' %}" class="bg-blue-600 text-white px-4 py-2 rounded">{% trans "Learn more" %}</a>
+          </div>
+        </section>
+        {% endblock %}
+      </div>
     </main>
   </div>
 
@@ -124,6 +135,58 @@
   </footer> -->
 
   <style>
+    /* Header avec z-index élevé */
+    header {
+      z-index: 1000; /* Plus élevé que tout */
+    }
+
+    /* Assurez-vous que le sélecteur de langue soit clickable */
+    select {
+      z-index: 1001; /* Encore plus élevé */
+      position: relative;
+    }
+
+    /* Ajustez le z-index du gradient */
+    .mouse-gradient {
+      z-index: 0; /* Reste en bas */
+    }
+
+    .content-wrapper {
+      z-index: 1; /* Contenu au-dessus du gradient */
+    }
+    /* Effet spotlight sur le main content */
+    main {
+      position: relative;
+      overflow: hidden;
+    }
+  
+    .mouse-gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(
+        circle 200px at var(--mouse-x) var(--mouse-y),
+        rgba(75, 85, 99, 0.04) 0%,      /* gray-600 ultra subtil */
+        rgba(107, 114, 128, 0.02) 40%,  /* gray-500 presque invisible */
+        transparent 80%
+      );
+      pointer-events: none;
+      z-index: 0;
+      transition: background 0.3s ease;
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Par défaut, toutes les sections ont la marge my-16 */
+    section {
+      margin-top: 4rem; /* 64px */
+      margin-bottom: 4rem; /* 64px */
+    }
     /* Effet au survol : texte noir et souligné */
     .navbar-link:hover {
       text-decoration: underline;
@@ -187,6 +250,33 @@
     }
 
   </style>
-
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const gradient = document.getElementById('mouse-gradient');
+      const main = document.getElementById('main-content');
+      
+      if (gradient && main) {
+        main.addEventListener('mousemove', (e) => {
+          const rect = main.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          // Effet très subtil - presque imperceptible mais élégant
+          gradient.style.background = `
+            radial-gradient(
+              circle 220px at ${x}px ${y}px,
+              rgba(75, 85, 99, 0.03) 0%,
+              rgba(107, 114, 128, 0.01) 50%,
+              transparent 90%
+            )
+          `;
+        });
+        
+        main.addEventListener('mouseleave', () => {
+          gradient.style.background = 'transparent';
+        });
+      }
+    });
+  </script>
 </body>
 </html>

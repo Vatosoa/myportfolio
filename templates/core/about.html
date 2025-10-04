@@ -1,53 +1,77 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
-{% block title %}{% trans "VR" %}{% endblock %}
+{% block title %}{% trans "VR - About" %}{% endblock %}
 {% block content %}
 
-<!-- About Section -->
+<!-- About Section Détaillée -->
 <section id="about" class="my-16">
-  <h2 class="text-3xl font-bold mb-6 ml-20">{% if LANGUAGE_CODE == 'fr' %}À propos{% else %}About{% endif %}</h2>
-  <div class="flex flex-col text-justify relative ml-20 mr-20">
-    {% if LANGUAGE_CODE == 'fr' %}
-    Je suis développeur Odoo Python avec plus d'un an d'expérience.
-    J'ai travaillé sur différentes parties du système,
-    notamment le backend (modèles Python, contrôleurs) et le frontend (vues XML, JavaScript, OWL).
-    J'ai une expérience significative dans la personnalisation de modules comme les ventes, les achats, la comptabilité,
-    et dans la génération de rapports (factures, avoirs, etc.).
-    <br><br>
-    Mon expertise comprend également l'intégration d'APIs pour améliorer les processus d'automatisation,
-    ainsi que la modification du site web d'Odoo pour répondre aux besoins spécifiques des clients.
-    <br><br>
-    J'ai un diplôme de master en informatique de l'Ecole Nationale d'Informatique de Madagascar,
-    avec un projet de recherche portant sur l'IA et le deep learning appliqué au traitement du langage naturel en
-    malgache.
-    <br><br>
-    En dehors du travail, je suis impliqué dans des projets bénévoles, notamment l'organisation d'événements
-    scientifiques. Je suis quelqu'un qui s'adapte rapidement aux nouveaux environnements et qui aime apprendre en
-    permanence, ce qui me permet de m'améliorer et de rester à jour avec les dernières technologies
-    
+  <h2 class="text-3xl font-bold mb-8 ml-20">{% if LANGUAGE_CODE == 'fr' %}À Propos{% else %}About Me{% endif %}</h2>
+  <div class="flex flex-col text-justify relative ml-20 mr-20 space-y-8">
+    {% if about_content %}
+      <!-- En-tête avec image et résumé -->
+      <div class="flex flex-col md:flex-row items-start gap-8">
+        <div class="md:w-1/3">
+          <img src="/static/images/vatosoa.jpg" alt="Vatosoa Razafindrazaka" class="rounded-lg shadow-md w-full">
+        </div>
+        <div class="md:w-2/3">
+          <h3 class="text-2xl font-bold mb-4">
+            {% if LANGUAGE_CODE == 'fr' %}Profil Professionnel{% else %}Professional Profile{% endif %}
+          </h3>
+          <p class="text-lg leading-relaxed text-gray-700">{{ about_content.professional_summary|linebreaks }}</p>
+        </div>
+      </div>
+
+      <!-- Formation -->
+      <div class="bg-white p-8 rounded-lg border border-gray-200">
+        <h3 class="text-2xl font-bold mb-4 text-gray-800">
+          📚 {% if LANGUAGE_CODE == 'fr' %}Parcours Académique{% else %}Academic Background{% endif %}
+        </h3>
+        <div class="text-gray-700 leading-relaxed">
+          {{ about_content.education|linebreaks }}
+        </div>
+      </div>
+
+      <!-- Bénévolat -->
+      <div class="bg-white p-8 rounded-lg border border-gray-200">
+        <h3 class="text-2xl font-bold mb-4 text-gray-800">
+          🤝 {% if LANGUAGE_CODE == 'fr' %}Engagement Communautaire{% else %}Community Engagement{% endif %}
+        </h3>
+        <div class="text-gray-700 leading-relaxed">
+          {{ about_content.volunteer_work|linebreaks }}
+        </div>
+      </div>
+
+      <!-- Philosophie -->
+      <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-lg">
+        <h3 class="text-2xl font-bold mb-4 text-gray-800">
+          💫 {% if LANGUAGE_CODE == 'fr' %}Philosophie & Valeurs{% else %}Philosophy & Values{% endif %}
+        </h3>
+        <div class="text-gray-700 leading-relaxed text-lg">
+          {{ about_content.personal_qualities|linebreaks }}
+        </div>
+      </div>
+
     {% else %}
-    I'm an Odoo Python developer with over a year's experience.
-    I've worked on various parts of the system,
-    including the backend (Python templates, controllers) and the frontend (XML views, JavaScript, OWL).
-    I have significant experience in customizing modules such as sales, purchasing, accounting,
-    and in generating reports (invoices, credit notes, etc.).
-    <br><br>
-    My expertise also includes integrating APIs to improve automation processes,
-    as well as modifying the Odoo website to meet specific customer needs.
-    <br><br>
-    I have a master's degree in computer science from the Ecole Nationale d'Informatique de Madagascar,
-    with a research project focusing on AI and deep learning applied to natural language processing in
-    Malagasy.
-    <br><br>
-    Outside of work, I'm involved in volunteer projects, including organizing events
-    scientific. I'm someone who adapts quickly to new environments and likes to learn by
-    constantly, which enables me to improve and stay up to date with the latest technologies.
+      <!-- Message si pas de contenu -->
+      <div class="text-center py-12">
+        <div class="text-gray-400 mb-4">
+          <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-600 mb-2">
+          {% trans "Content Coming Soon" %}
+        </h3>
+        <p class="text-gray-500 mb-4">
+          {% trans "This section is being updated with dynamic content." %}
+        </p>
+        <a href="/admin/core/aboutcontent/add/" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+          {% trans "Add Content in Admin" %}
+        </a>
+      </div>
     {% endif %}
   </div>
 </section>
-{% include 'core/experience.html' %}
-{% include 'core/projects.html' %}
-{% include 'core/publications.html' %}
-{% include 'core/cv.html' %}
+
 {% endblock %}

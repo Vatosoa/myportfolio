@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from django.utils.timezone import now
+import os
+from decouple import config  # Nouveau: pour gérer les variables sensibles
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +23,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-vx44esaqk2i#e^cym4zj4=2%41@6v!!0uji#7qe+4kc_qpjcw3"
+# SECRET_KEY = "django-insecure-vx44esaqk2i#e^cym4zj4=2%41@6v!!0uji#7qe+4kc_qpjcw3"
+# 👇 Utilisez python-decouple pour plus de sécurité
+SECRET_KEY = config('SECRET_KEY', default="django-insecure-vx44esaqk2i#e^cym4zj4=2%41@6v!!0uji#7qe+4kc_qpjcw3")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+# 👇 DEBUG doit être False en production
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -105,10 +111,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = "en"
+LANGUAGE_CODE = "fr"
 LANGUAGES = [
-    ('en', 'English'),
     ('fr', 'Français'),
+    ('en', 'English'),
 ]
 LANGUAGE_COOKIE_NAME = 'django_language'
 LANGUAGE_COOKIE_SAMESITE = 'Lax'
@@ -119,7 +125,8 @@ LOCALE_PATHS = [
     BASE_DIR / 'locale',
 ]
 
-TIME_ZONE = "UTC"
+# TIME_ZONE = "UTC"
+TIME_ZONE = 'Europe/Paris'  # Plus pertinent
 
 USE_I18N = True
 
@@ -133,6 +140,11 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 TEMPLATES[0]['DIRS'] = [BASE_DIR / 'templates']
 
+# 👇 Pour servir les fichiers statiques en production
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 

@@ -1,34 +1,38 @@
 {% load i18n %}
 <section id="experience" class="my-16">
   <h2 class="text-3xl font-bold mb-6 ml-20">{% trans "Experience" %}</h2>
-  <div class="flex flex-col text-justify relative ml-20 mr-20">
-    2024 — Present : Odoo développement chez Primanet (Advences) <br>
-    Odoo Python Developer at Primanet (Advences) <br>
-    Backend Odoo : report et template avec PostgreSQL et
-    utilisation de ColdFusion avec SQL. server
-    <br><br>
-    2021 — 2023 : Projet de recherche au sein de LIMAD Glore <br>
-    Chercheur<br>
-    Conception et mise en œuvre d'un système de traitement
-    automatique du langage malgache avec Python, Django,
-    Deep Learning, Keras, Tensorflow, Scikit-learn, Matplotlib
-    <br><br>
-    2018 — 2024 : Audit et Développement d'une application <br>
-    Développement d’une application de gestion des étudiants en
-    utilisant Django<br>
-    Audit de gestion de note avec « reporting » en utilisant Java
-    Swing, MySQL<br>
-    Développement d’une application de gestion de stock avec
-    Trigger en utilisant Java FX, MySQL<br>
-    Développement d’une application de gestion des étudiants en
-    utilisant Jython<br>
-    Développement d’une application de gestion de soutenance
-    avec AngularJS, Spring Boot, Hibernate, PostgreSQL<br>
-    Exportation de données de l’ERP vers Odoo en utilisant
-    PostgreSQL<br>
-    Conception et réalisation d’une application de mise en vente
-    des produits pour la société Socolait en utilisant Django<br>
-    Développement du site web Odoo, développement d’une
-    application mobile avec FlutterFlow<br>
+  <div class="ml-20 mr-20 space-y-6">
+    {% for exp in experiences %}
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <div class="flex justify-between items-start mb-2">
+        <h3 class="text-xl font-bold">{{ exp.title }}</h3>
+        <span class="bg-gray-200 text-gray-700 px-2 py-1 rounded text-sm">
+          {{ exp.get_experience_type_display }}
+        </span>
+      </div>
+      
+      <p class="text-lg font-semibold text-gray-700">{{ exp.company }}</p>
+      
+      <p class="text-gray-600 mb-3">
+        {{ exp.start_date|date:"M Y" }} - 
+        {% if exp.current %}
+          {% trans "Present" %}
+        {% else %}
+          {{ exp.end_date|date:"M Y" }}
+        {% endif %}
+      </p>
+      
+      <p class="text-gray-700">{{ exp.description }}</p>
+      
+      {% if exp.technologies %}
+      <div class="mt-3">
+        <strong>{% trans "Technologies" %}:</strong>
+        <span class="text-gray-600">{{ exp.technologies }}</span>
+      </div>
+      {% endif %}
+    </div>
+    {% empty %}
+    <p>{% trans "No experience available yet." %}</p>
+    {% endfor %}
   </div>
 </section>

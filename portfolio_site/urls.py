@@ -21,6 +21,7 @@ from django.http import HttpResponseRedirect
 from django.utils import translation
 
 from django.conf import settings
+from django.conf.urls.static import static
 
 def redirect_to_language(request):
     lang = translation.get_language_from_request(request, check_path=False)
@@ -40,3 +41,7 @@ urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
 )
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

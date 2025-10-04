@@ -1,6 +1,31 @@
-/.vscode
-/core/__pycache__
-/core/migrations/__pycache__
-/portfolio_site/__pycache__
-myporfolio/lib
-portfolio_site/lib
+# Python cache files - TOUS les __pycache__
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# VS Code
+.vscode/
+
+# Virtual environments  
+myportfolio/lib/
+portfolio_site/lib/
+env/
+venv/
+.venv/
+
+# Django migrations CACHE SEULEMENT
+*/migrations/__pycache__/
+
+# Database
+*.sqlite3
+*.db
+db.sqlite3
+
+# Static files collected
+staticfiles/
+media/
+
+# OS
+.DS_Store
+Thumbs.db
