@@ -38,7 +38,7 @@ def home(request, lang=None):
         'skills_categories': SkillCategory.objects.prefetch_related('skills').all(),
         'now': now(),
     })
-    return render(request, 'core/home.html', context)
+    return render(request, 'base.html', context)
 
 def about(request, lang=None):
     context = set_language_context(request, lang)
