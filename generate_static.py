@@ -75,16 +75,17 @@ def generate_static_site():
     <meta charset="utf-8">
     <title>Redirection</title>
     <script>
-        // Rediriger vers /fr/ par défaut
+        // Correction : On ajoute le nom du dépôt 'myportfolio'
+        const repo = 'myportfolio'; 
         const lang = navigator.language.startsWith('fr') ? 'fr' : 'en';
-        window.location.href = `/${lang}/`;
+        window.location.href = `/${repo}/${lang}/`;
     </script>
 </head>
 <body>
     <p>Redirection vers votre langue...</p>
 </body>
 </html>''')
-        
+
         print(f"✅ Site statique généré avec succès dans {dist_dir}")
         
         # Supprimer la sauvegarde si tout est OK
