@@ -7,13 +7,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vatosoa</title>
+  <title>Vatosoa Razafindrazaka</title>
+  <!-- Favicon pour l'onglet du navigateur -->
+  <link rel="icon" href="{% static 'images/vintage-image.png' %}" type="image/png">
+  <link rel="shortcut icon" href="{% static 'images/vintage-image.png' %}" type="image/x-icon">
+
+  <!-- Pour les appareils Apple -->
+  <link rel="apple-touch-icon" href="{% static 'images/vintage-image.png' %}">
   
   <!-- NOUVELLES POLICES : Delicious Handrawn, Montserrat, Abril Fatface -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Delicious+Handrawn&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <!-- Font Awesome pour les icônes sociales -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
@@ -95,7 +101,6 @@
       font-style: normal;
     }
     
-
     /* Navigation minimaliste - CENTRÉE avec Delicious Handrawn */
 .navbar {
   position: fixed;
@@ -104,20 +109,25 @@
   right: 0;
   padding: 1.5rem 2rem;
   z-index: 1000;
-  background: rgba(10, 10, 10, 0.9);
+  background: rgba(10, 10, 10, 0.95);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--black-border);
   transition: all 0.3s ease;
-  /* Ajout pour centrer le contenu */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Supprimer la largeur maximale du container dans la navbar */
 .navbar > .container {
-  max-width: none;
-  width: auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-content-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .nav-links-container {
@@ -129,26 +139,22 @@
 .nav-link {
   color: var(--text-secondary);
   text-decoration: none;
-  font-size: 1.1rem; /* Un peu plus grand pour la police manuscrite */
+  font-size: 1.1rem;
   position: relative;
   transition: all 0.3s ease;
-  /* Utilisation de Delicious Handrawn en majuscules */
-  /* font-family: "Abril Fatface", cursive; */
   font-family: "Sour Gummy", sans-serif;
-  /* font-family: 'Montserrat', sans-serif; */
   font-weight: 400;
   text-transform: capitalize;
   letter-spacing: 1px;
-
 }
 
 .nav-link::after {
   content: '';
   position: absolute;
-  bottom: -8px; /* Un peu plus bas pour la police plus grande */
+  bottom: -8px;
   left: 0;
   width: 0;
-  height: 2px; /* Un peu plus épais */
+  height: 2px;
   background: var(--accent-matte-gold);
   transition: width 0.3s ease;
 }
@@ -165,61 +171,169 @@
   color: var(--accent-matte-gold);
 }
 
-/* Language Toggle - Ajusté pour la nouvelle navbar */
-.language-toggle {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  margin-left: 2rem; /* Espacement des liens de navigation */
-}
-
-.lang-btn {
-  background: transparent;
-  border: 1px solid var(--black-border);
+/* Mobile Toggle Button (Hamburger) */
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
   color: var(--text-secondary);
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
+  font-size: 1.5rem;
   cursor: pointer;
+  padding: 0.5rem;
   transition: all 0.3s ease;
-  font-family: "Delicious Handrawn", serif; /* Même police que les liens */
-  font-size: 1rem;
-  text-transform: uppercase;
 }
 
-.lang-btn:hover {
-  border-color: var(--accent-matte-gold);
+.mobile-toggle:hover {
   color: var(--accent-matte-gold);
 }
 
-.lang-btn.active {
-  background: rgba(181, 154, 109, 0.1);
-  border-color: var(--accent-matte-gold);
-  color: var(--accent-matte-gold);
-}
-
-/* Responsive Design - Ajustements pour la navbar centrée */
-@media (max-width: 768px) {
+/* Responsive Design */
+@media (max-width: 992px) {
   .navbar {
-    padding: 1rem;
+    padding: 1rem 1.5rem;
   }
   
   .nav-links-container {
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
+    gap: 2rem;
   }
   
   .nav-link {
-    margin: 0.5rem 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+    justify-content: space-between;
   }
   
-  .language-toggle {
-    margin-left: 0;
-    margin-top: 1rem;
+  .mobile-toggle {
+    display: block;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1001;
+  }
+  
+  .nav-content-wrapper {
+    justify-content: flex-start;
+  }
+  
+  .nav-links-container {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: 100vh;
+    background: var(--black-card);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 5rem 2rem 2rem;
+    gap: 1.5rem;
+    transition: right 0.4s ease;
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    overflow-y: auto;
+    border-left: 1px solid var(--black-border);
+  }
+  
+  .nav-links-container.active {
+    right: 0;
+  }
+  
+  .nav-link {
+    font-size: 1.2rem;
+    padding: 0.5rem 0;
+    width: 100%;
+    border-bottom: 1px solid rgba(42, 42, 42, 0.3);
+  }
+  
+  .nav-link:last-child {
+    border-bottom: none;
+  }
+  
+  .nav-link::after {
+    bottom: -5px;
+  }
+  
+  /* Overlay pour le menu mobile */
+  .nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-links-container {
+    width: 85%;
+    max-width: 280px;
+    padding: 4rem 1.5rem 1.5rem;
+  }
+  
+  .nav-link {
+    font-size: 1.1rem;
   }
 }
     
+    /* Language Toggle - Ajusté pour la nouvelle navbar */
+    .language-toggle {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      margin-left: 2rem; /* Espacement des liens de navigation */
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: 1px solid var(--black-border);
+      color: var(--text-secondary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: "Delicious Handrawn", serif; /* Même police que les liens */
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+
+    .lang-btn:hover {
+      border-color: var(--accent-matte-gold);
+      color: var(--accent-matte-gold);
+    }
+
+    .lang-btn.active {
+      background: rgba(181, 154, 109, 0.1);
+      border-color: var(--accent-matte-gold);
+      color: var(--accent-matte-gold);
+    }
+
+    /* Responsive Design - Ajustements pour la navbar centrée */
+    @media (max-width: 768px) {
+      
+      .language-toggle {
+        margin-left: 0;
+        margin-top: 1rem;
+      }
+    }
+        
     /* Container */
     .container {
       max-width: 1200px;
@@ -229,104 +343,104 @@
     
     /* HERO SECTION REDESIGN */
     /* Colonne image avec icônes sociales intégrées */
-.hero-image-column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  position: relative;
-}
+    .hero-image-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      position: relative;
+    }
 
-.hero-social-links {
-  display: flex;
-  gap: 1.2rem;
-  margin-top: 0.5rem;
-}
+    .hero-social-links {
+      display: flex;
+      gap: 1.2rem;
+      margin-top: 0.5rem;
+    }
 
-.hero-social-links .social-link {
-  width: 40px;
-  height: 40px;
-  font-size: 1.1rem;
-  background: rgba(42, 42, 42, 0.5);
-  border: 1px solid var(--black-border);
-  color: var(--text-secondary); 
-  transition: all 0.3s ease;
-  animation: pulse 2s infinite;
-  border-radius: 50%;
-  /* Centrage parfait */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none; /* Supprime le soulignement */
-}
+    .hero-social-links .social-link {
+      width: 40px;
+      height: 40px;
+      font-size: 1.1rem;
+      background: rgba(42, 42, 42, 0.5);
+      border: 1px solid var(--black-border);
+      color: var(--text-secondary); 
+      transition: all 0.3s ease;
+      animation: pulse 2s infinite;
+      border-radius: 50%;
+      /* Centrage parfait */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none; /* Supprime le soulignement */
+    }
 
-.hero-social-links .social-link:hover {
-  background: rgba(181, 154, 109, 0.2);
-  transform: translateY(-3px) scale(1.1);
-  box-shadow: 0 5px 15px rgba(181, 154, 109, 0.3);
-}
+    .hero-social-links .social-link:hover {
+      background: rgba(181, 154, 109, 0.2);
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: 0 5px 15px rgba(181, 154, 109, 0.3);
+    }
 
-/* Animation légère pour attirer l'attention */
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(181, 154, 109, 0.2);
-  }
-  70% {
-    box-shadow: 0 0 0 5px rgba(181, 154, 109, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(181, 154, 109, 0);
-  }
-}
+    /* Animation légère pour attirer l'attention */
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(181, 154, 109, 0.2);
+      }
+      70% {
+        box-shadow: 0 0 0 5px rgba(181, 154, 109, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(181, 154, 109, 0);
+      }
+    }
 
-/* Ajustement du conteneur hero */
-.hero-container {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 4rem;
-  align-items: start; /* Changé de center à start pour aligner en haut */
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  position: relative;
-}
+    /* Ajustement du conteneur hero */
+    .hero-container {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 4rem;
+      align-items: start; /* Changé de center à start pour aligner en haut */
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+    }
 
-/* Ajustement de la hauteur de l'image pour compenser */
-.hero-image-container {
-  position: relative;
-  width: 300px;
-  height: 380px; /* Réduit un peu pour faire de la place aux icônes */
-  flex-shrink: 0;
-}
+    /* Ajustement de la hauteur de l'image pour compenser */
+    .hero-image-container {
+      position: relative;
+      width: 300px;
+      height: 380px; /* Réduit un peu pour faire de la place aux icônes */
+      flex-shrink: 0;
+    }
 
-@media (max-width: 768px) {
-  .hero-image-container {
-    width: 220px;
-    height: 300px;
-  }
-  
-  .hero-social-links .social-link {
-    width: 38px;
-    height: 38px;
-    font-size: 1rem;
-  }
-}
+    @media (max-width: 768px) {
+      .hero-image-container {
+        width: 220px;
+        height: 300px;
+      }
+      
+      .hero-social-links .social-link {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+      }
+    }
 
-@media (max-width: 480px) {
-  .hero-image-container {
-    width: 200px;
-    height: 280px;
-  }
-  
-  .hero-social-links {
-    gap: 1rem;
-  }
-  
-  .hero-social-links .social-link {
-    width: 36px;
-    height: 36px;
-  }
-}
+    @media (max-width: 480px) {
+      .hero-image-container {
+        width: 200px;
+        height: 280px;
+      }
+      
+      .hero-social-links {
+        gap: 1rem;
+      }
+      
+      .hero-social-links .social-link {
+        width: 36px;
+        height: 36px;
+      }
+    }
     .hero-section {
       min-height: 100vh;
       display: flex;
@@ -366,8 +480,6 @@
       position: relative;
       /* border: 1px solid rgba(181, 154, 109, 0.1); */
     }
-
-    
 
     .profile-image:hover {
       filter: grayscale(0%) contrast(1.05) brightness(1);
@@ -428,8 +540,8 @@
       flex-direction: column;
       gap: 0.5rem;
       margin: 2.5rem 0 3rem;
-      padding-left: 0.5rem;
-      border-left: 2px solid var(--accent-matte-gold);
+      /* padding-left: 0.5rem; */
+      /* border-left: 2px solid var(--accent-matte-gold); */
     }
 
     .identity-statement {
@@ -442,7 +554,7 @@
 
     .identity-subtitle {
       font-size: clamp(1.4rem, 1.5vw, 1.3rem);
-      color: var(--accent-matte-teal);
+      color: var(--text-primary);
       font-family: 'Sour Gummy', sans-serif;
       font-weight: 300;
       letter-spacing: 2px;
@@ -521,8 +633,8 @@
 
     .hero-decoration {
       position: absolute;
-      right: 10%;
-      bottom: 10%;
+      right: 15%;
+      bottom: 7%;
       color: var(--text-matte);
       font-size: 1.1rem;
       font-family: "Delicious Handrawn", cursive;
@@ -572,55 +684,55 @@
       }
     }
 
-/* Icônes sociales pour mobile (dans le contenu) */
-.hero-content .hero-social-links.mobile-only {
-  display: none;
-}
+    /* Icônes sociales pour mobile (dans le contenu) */
+    .hero-content .hero-social-links.mobile-only {
+      display: none;
+    }
 
-/* Pour desktop - masquer les icônes mobiles */
-@media (min-width: 993px) {
-  .hero-content .hero-social-links.mobile-only {
-    display: none !important;
-  }
-  
-  .hero-image-column .hero-social-links {
-    display: flex;
-  }
-}
+    /* Pour desktop - masquer les icônes mobiles */
+    @media (min-width: 993px) {
+      .hero-content .hero-social-links.mobile-only {
+        display: none !important;
+      }
+      
+      .hero-image-column .hero-social-links {
+        display: flex;
+      }
+    }
 
-/* Pour mobile - afficher les icônes dans le contenu */
-@media (max-width: 992px) {
-  .hero-content .hero-social-links.mobile-only {
-    display: flex;
-    justify-content: center;
-    gap: 1.2rem;
-    margin-top: 2rem;
-  }
-  
-  .hero-image-column .hero-social-links {
-    display: none !important;
-  }
-  
-  .hero-content .social-link {
-    width: 45px;
-    height: 45px;
-    font-size: 1.2rem;
-    background: rgba(42, 42, 42, 0.5);
-    border: 1px solid var(--black-border); /* Bordure discrète */
-  color: var(--text-secondary); 
-    transition: all 0.3s ease;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .hero-content .social-link:hover {
-    background: rgba(181, 154, 109, 0.2);
-    transform: translateY(-3px) scale(1.1);
-    box-shadow: 0 5px 15px rgba(181, 154, 109, 0.3);
-  }
-}
+    /* Pour mobile - afficher les icônes dans le contenu */
+    @media (max-width: 992px) {
+      .hero-content .hero-social-links.mobile-only {
+        display: flex;
+        justify-content: center;
+        gap: 1.2rem;
+        margin-top: 2rem;
+      }
+      
+      .hero-image-column .hero-social-links {
+        display: none !important;
+      }
+      
+      .hero-content .social-link {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+        background: rgba(42, 42, 42, 0.5);
+        border: 1px solid var(--black-border); /* Bordure discrète */
+      color: var(--text-secondary); 
+        transition: all 0.3s ease;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .hero-content .social-link:hover {
+        background: rgba(181, 154, 109, 0.2);
+        transform: translateY(-3px) scale(1.1);
+        box-shadow: 0 5px 15px rgba(181, 154, 109, 0.3);
+      }
+    }
 
     @media (max-width: 768px) {
       .hero-section {
@@ -739,6 +851,114 @@
       transform: scaleX(1);
     }
     
+    /* Styles pour la section Projects & Experience */
+    .experience-location {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(42, 42, 42, 0.5);
+      color: var(--accent-matte-teal);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .experience-location i {
+      font-size: 0.8rem;
+    }
+
+    .project-achievements {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .achievement {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .achievement i {
+      color: var(--accent-matte-teal);
+      font-size: 0.8rem;
+    }
+
+    .education-details {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .education-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .education-item i {
+      color: var(--accent-matte-gold);
+      font-size: 1rem;
+      margin-top: 0.2rem;
+    }
+
+    .education-item div {
+      flex: 1;
+    }
+
+    .education-item strong {
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .education-item div div {
+      font-size: 0.85rem;
+      color: var(--text-matte);
+    }
+
+    /* Badge pour le statut publié */
+    .research-badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      background: rgba(95, 141, 158, 0.15);
+      color: var(--accent-matte-blue);
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+      border: 1px solid rgba(95, 141, 158, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .project-achievements {
+        flex-direction: column;
+      }
+      
+      .education-details {
+        gap: 0.75rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .experience-location,
+      .achievement,
+      .education-item {
+        font-size: 0.85rem;
+      }
+      
+      .education-item strong {
+        font-size: 0.9rem;
+      }
+    }
+
     /* Project Cards */
     .projects-grid {
       display: grid;
@@ -799,7 +1019,7 @@
       display: inline-block;
       padding: 0.25rem 0.75rem;
       border-radius: 20px;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       font-family: 'Montserrat', sans-serif;
       background: rgba(95, 158, 141, 0.1);
       color: var(--accent-matte-teal);
@@ -1032,15 +1252,6 @@
     
     /* Responsive Design */
     @media (max-width: 768px) {
-      .navbar {
-        padding: 1rem;
-      }
-      
-      .nav-link {
-        margin: 0 0.75rem;
-        font-size: 1rem;
-      }
-      
       .hero-section {
         padding-top: 120px;
       }
@@ -1191,26 +1402,404 @@
       visibility: visible;
       transform: translateX(-50%) scale(1);
     }
+
+    /* ========== FLÈCHE BACK TO TOP ========== */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background-color: var(--accent-matte-gold);
+      color: var(--black-bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      z-index: 999;
+      border: 1px solid var(--black-border);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      background-color: var(--text-primary);
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 6px 20px rgba(181, 154, 109, 0.4);
+    }
+
+    .back-to-top i {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .back-to-top:hover i {
+      transform: translateY(-2px);
+    }
+
+    /* Animation d'apparition */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .back-to-top.visible {
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    /* Responsive pour la flèche */
+    @media (max-width: 768px) {
+      .back-to-top {
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .back-to-top i {
+        font-size: 1rem;
+      }
+    }
+
+    /* ========== MINIMALIST LIST STYLES ========== */
+.skills-minimalist {
+  max-width: 800px;
+  margin: 3rem auto 0;
+}
+
+.skill-group {
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(42, 42, 42, 0.5);
+}
+
+.skill-group:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.skill-group-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--accent-matte-gold);
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.skill-group-title i {
+  font-size: 1.1rem;
+  width: 30px;
+  text-align: center;
+}
+
+.skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.skill-chip {
+  padding: 0.5rem 1rem;
+  background: rgba(42, 42, 42, 0.3);
+  color: var(--text-secondary);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.skill-chip:hover {
+  background: rgba(181, 154, 109, 0.1);
+  color: var(--accent-matte-gold);
+  border-color: var(--accent-matte-gold);
+  transform: translateY(-2px);
+}
+
+/* ========== COMPACT TIMELINE STYLES ========== */
+.compact-timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 4rem auto 0;
+  /* padding-top: 3rem; */
+  padding-top: 0 !important;
+}
+
+.timeline-track {
+  display: none;
+}
+
+.timeline-track {
+  position: absolute;
+  top: 0;
+  left: 50px;
+  right: 50px;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--accent-matte-gold), 
+    var(--accent-matte-teal), 
+    transparent);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.timeline-milestone {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.milestone-dot {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  background: var(--black-card);
+  border: 2px solid var(--accent-matte-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-matte-gold);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.milestone-dot::before {
+  content: attr(data-year);
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--accent-matte-teal);
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0.8;
+}
+
+.milestone-dot:hover {
+  background: var(--accent-matte-gold);
+  color: var(--black-bg);
+  transform: scale(1.2);
+  box-shadow: 0 0 0 6px rgba(181, 154, 109, 0.2);
+}
+
+.milestone-content {
+  flex: 1;
+  background: rgba(26, 26, 26, 0.7);
+  border: 1px solid rgba(42, 42, 42, 0.5);
+  border-radius: 15px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.milestone-content:hover {
+  border-color: var(--accent-matte-gold);
+  transform: translateX(5px);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.milestone-date {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  background: rgba(181, 154, 109, 0.1);
+  color: var(--accent-matte-gold);
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+  border: 1px solid rgba(181, 154, 109, 0.2);
+}
+
+.milestone-title {
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.milestone-location {
+  color: var(--accent-matte-teal);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.milestone-location i {
+  font-size: 0.8rem;
+}
+
+.milestone-summary {
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.milestone-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.milestone-tag {
+  padding: 0.3rem 0.7rem;
+  background: rgba(42, 42, 42, 0.5);
+  color: var(--accent-matte-blue);
+  border-radius: 12px;
+  font-size: 0.75rem;
+  border: 1px solid rgba(95, 141, 158, 0.2);
+  transition: all 0.3s ease;
+}
+
+.milestone-tag:hover {
+  background: rgba(95, 141, 158, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .compact-timeline {
+    padding-top: 2.5rem;
+  }
+  
+  .timeline-track {
+    left: 30px;
+    right: 30px;
+  }
+  
+  .timeline-milestone {
+    gap: 1.5rem;
+  }
+  
+  .milestone-dot {
+    width: 35px;
+    height: 35px;
+    font-size: 0.85rem;
+  }
+  
+  .milestone-dot::before {
+    top: -25px;
+    font-size: 0.8rem;
+  }
+  
+  .milestone-content {
+    padding: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-track {
+    left: 25px;
+    right: 25px;
+  }
+  
+  .timeline-milestone {
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .milestone-dot {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+  
+  .milestone-dot::before {
+    top: -22px;
+    font-size: 0.75rem;
+  }
+  
+  .milestone-title {
+    font-size: 1.2rem;
+  }
+  
+  .milestone-summary {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .compact-timeline {
+    padding-top: 2rem;
+  }
+  
+  .timeline-track {
+    left: 20px;
+    right: 20px;
+  }
+  
+  .timeline-milestone {
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1.8rem;
+  }
+  
+  .milestone-dot {
+    align-self: flex-start;
+  }
+  
+  .milestone-dot::before {
+    left: 0;
+    transform: none;
+    top: -25px;
+  }
+  
+  .milestone-content:hover {
+    transform: translateY(-3px);
+  }
+}
   </style>
 </head>
 <body>
   <!-- Navigation -->
   <nav class="navbar" id="navbar">
     <div class="container">
-      <div style="display: flex; justify-content: center; align-items: center;">
-        <div style="display: flex; align-items: center; gap: 2rem;">
-          <div style="display: flex; gap: 1.5rem;">
-            <a href="#projects" class="nav-link">Projects</a>
-            <a href="#impact" class="nav-link">Impact</a>
-            <a href="#skills" class="nav-link">Skills</a>
-            <a href="#punchline" class="nav-link">Beyond</a>
-          </div>
-          <!-- <div class="language-toggle">
-            <button class="lang-btn active">EN</button>
-            <button class="lang-btn">FR</button>
-          </div>
-        </div> -->
+      <div class="nav-content-wrapper">
+        <div class="nav-links-container" id="navLinks">
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#publications" class="nav-link">Publications</a>
+          <a href="#impact" class="nav-link">Impact</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#punchline" class="nav-link">Beyond</a>
+        </div>
       </div>
+      <!-- Bouton hamburger pour mobile -->
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <!-- Overlay pour fermer le menu -->
+      <div class="nav-overlay" id="navOverlay"></div>
     </div>
   </nav>
 
@@ -1232,7 +1821,7 @@
             <a href="https://linkedin.com/in/vatosoa-razafindrazaka/" target="_blank" class="social-link" title="LinkedIn">
               <i class="fab fa-linkedin-in"></i>
             </a>
-            <a href="#" class="social-link" title="Twitter (X)">
+            <a href="https://x.com/VRazafindrazaka" class="social-link" title="Twitter (X)">
               <i class="fab fa-twitter"></i>
             </a>
           </div>
@@ -1246,6 +1835,14 @@
           </h1>
           
           <!-- Ajoutez ceci dans la section identity-block de votre templates/base.html -->
+           <div class="identity-block">
+            <div class="identity-statement">
+              Odoo Developer & AI Researcher
+            </div>
+            <!-- <div class="identity-subtitle">
+              AI Researcher
+            </div> -->
+          </div>
           
           <!-- Version alternative avec badge plus visible -->
           <p class="hero-description">
@@ -1261,12 +1858,12 @@
             language.
           </p>
           
-          <div class="cta-container">
+          <!-- <div class="cta-container">
             <a href="#projects" class="hero-cta">
               View Projects
               <i class="fas fa-arrow-right"></i>
             </a>
-          </div>
+          </div> -->
           
           <!-- Icônes sociales pour mobile (apparaissent seulement sur mobile) -->
           <div class="hero-social-links mobile-only">
@@ -1294,167 +1891,306 @@
   <section id="projects" class="content-section">
     <div class="container">
       <h2 class="section-title reveal">Projects & Experience</h2>
-      <div class="projects-grid">
-        <!-- Project 1 -->
-        <div class="project-card reveal stagger-delay-1">
-          <div class="project-header">
-            <h3 class="project-title">AI-Powered Inventory Forecasting for Odoo</h3>
-            <span class="project-status">Production Deployment</span>
-          </div>
-          <p class="project-description">
-            Developed a custom Odoo module using time-series forecasting to reduce stockouts by 25% for a retail chain, optimizing inventory management and reducing carrying costs.
-          </p>
-          <div class="tech-tags">
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">Odoo 16</span>
-            <span class="tech-tag">TensorFlow</span>
-            <span class="tech-tag">PostgreSQL</span>
-            <span class="tech-tag">Time Series</span>
-          </div>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="project-card reveal stagger-delay-2">
-          <div class="project-header">
-            <h3 class="project-title">Research Paper Classification Engine</h3>
-            <span class="project-status">Research Focus</span>
-          </div>
-          <p class="project-description">
-            Built a fine-tuned BERT model to automatically categorize academic papers, achieving 94% accuracy across 50+ domains and significantly accelerating literature review processes.
-          </p>
-          <div class="tech-tags">
-            <span class="tech-tag">PyTorch</span>
-            <span class="tech-tag">Transformers</span>
-            <span class="tech-tag">FastAPI</span>
-            <span class="tech-tag">Docker</span>
-            <span class="tech-tag">BERT</span>
+      
+      <!-- Timeline Compacte -->
+      <div class="compact-timeline">
+        <!-- Timeline Track -->
+        <div class="timeline-track"></div>
+        
+        <!-- Odoo Experience -->
+        <div class="timeline-milestone reveal stagger-delay-1">
+          <div class="milestone-dot" data-year="2024"></div>
+          <div class="milestone-content">
+            <span class="milestone-date">May 2024 - Present</span>
+            <h3 class="milestone-title">Odoo Development - Odoo Python Developer</h3>
+            <div class="milestone-location">
+              <i class="fas fa-building"></i> Primanet (Advences)
+            </div>
+            <p class="milestone-summary">
+              Development and customization of Odoo modules to meet specific customer needs. 
+              <br>Audit and optimization of existing applications with PostgreSQL.
+              <br>Integration of backend solutions with ColdFusion and SQL Server.
+            </p>
+            <div class="milestone-tags">
+              <span class="milestone-tag">Odoo</span>
+              <span class="milestone-tag">Python ORM</span>
+              <span class="milestone-tag">XML</span>
+              <span class="milestone-tag">ColdFusion</span>
+              <span class="milestone-tag">PostgreSQL</span>
+              <span class="milestone-tag">SQL Server</span>
+            </div>
           </div>
         </div>
 
-        <!-- Project 3 -->
-        <div class="project-card reveal stagger-delay-3">
-          <div class="project-header">
-            <h3 class="project-title">Full-Stack Business Portal with Django</h3>
-            <span class="project-status">Active Project</span>
-          </div>
-          <p class="project-description">
-            Led the development of an integrated portal for SME analytics, serving 100+ daily active users with real-time business intelligence dashboards and automated reporting features.
-          </p>
-          <div class="tech-tags">
-            <span class="tech-tag">Django</span>
-            <span class="tech-tag">React</span>
-            <span class="tech-tag">PostgreSQL</span>
-            <span class="tech-tag">AWS</span>
-            <span class="tech-tag">REST API</span>
+        <!-- NLP Research -->
+        <div class="timeline-milestone reveal stagger-delay-2">
+          <div class="milestone-dot" data-year="2023"></div>
+          <div class="milestone-content">
+            <span class="milestone-date">Dec 2022 - Mar 2024</span>
+            <h3 class="milestone-title">NLP for Malagasy - Researcher</h3>
+            <div class="milestone-location">
+              <i class="fas fa-graduation-cap"></i> LIMAD GlOrE
+            </div>
+            <p class="milestone-summary">
+              Published research on morphosyntactic tagging in Malagasy sentence structure.
+              <br>Design and implementation of an automatic Malagasy language processing system.
+              <br>Use of deep learning for system performance analysis and improvement. 
+            </p>
+            <div class="milestone-tags">
+              <span class="milestone-tag">Django</span>
+              <span class="milestone-tag">TensorFlow</span>
+              <span class="milestone-tag">Keras</span>
+              <span class="milestone-tag">Scikit-learn</span>
+              <span class="milestone-tag">Matplotlib</span>
+              <span class="milestone-tag">Numpy</span>
+            </div>
           </div>
         </div>
 
-        <!-- Project 4 -->
-        <div class="project-card reveal stagger-delay-4">
-          <div class="project-header">
-            <h3 class="project-title">Odoo Manufacturing Optimization</h3>
-            <span class="project-status">Production Ready</span>
+        <!-- Full-Stack Projects -->
+        <div class="timeline-milestone reveal stagger-delay-3">
+          <div class="milestone-dot" data-year="2020"></div>
+          <div class="milestone-content">
+            <span class="milestone-date">Dec 2019 - Present</span>
+            <h3 class="milestone-title">Full-Stack Dev</h3>
+            <div class="milestone-location">
+              <i class="fas fa-laptop-code"></i> Various Projects
+            </div>
+            <p class="milestone-summary">
+              Development of management applications (students, inventory, thesis defense) with Django, Java Swing, Java FX, AngularJS, Spring Boot, Hibernate, and PostgreSQL.
+              <br>Exporting ERP data to Odoo and designing a sales application for Socolait.
+              <br>Creation of a website using Odoo and a mobile application with FlutterFlow.
+              <br>Audit and optimization of databases, implementation of triggers and customized reports.
+              <br>Development of a Malagasy crossword puzzle application with ReactJS and Django.
+            </p>
+            <div class="milestone-tags">
+              <span class="milestone-tag">Odoo</span>
+              <span class="milestone-tag">Django</span>
+              <span class="milestone-tag">Java</span>
+              <span class="milestone-tag">AngularJS</span>
+              <span class="milestone-tag">ReactJS</span>
+              <span class="milestone-tag">Spring boot</span>
+              <span class="milestone-tag">FlutterFlow</span>
+              <span class="milestone-tag">PostgreSQL</span>
+            </div>
           </div>
-          <p class="project-description">
-            Created a custom manufacturing module that streamlined production scheduling, reducing idle time by 35% and improving on-time delivery rates for manufacturing clients.
-          </p>
-          <div class="tech-tags">
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">Odoo 15</span>
-            <span class="tech-tag">XML</span>
-            <span class="tech-tag">JavaScript</span>
-            <span class="tech-tag">QWeb</span>
+        </div>
+
+        <!-- Education -->
+        <div class="timeline-milestone reveal stagger-delay-4">
+          <div class="milestone-dot" data-year="2019"></div>
+          <div class="milestone-content">
+            <span class="milestone-date">Ongoing</span>
+            <h3 class="milestone-title">Education</h3>
+            <div class="milestone-location">
+              <i class="fas fa-university"></i> ENI University + UNODC
+            </div>
+            <p class="milestone-summary">
+              Master's degree in Management Information Systems with a specialization in AI and language processing.
+              <br>Certified training in cybercrime awareness by the UNODC.
+            </p>
+            <div class="milestone-tags">
+              <span class="milestone-tag">Research</span>
+              <span class="milestone-tag">AI</span>
+              <span class="milestone-tag">NLP</span>
+              <span class="milestone-tag">Cybersecurity</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Research Section -->
+  <section id="publications" class="content-section" style="background: var(--black-light);">
+    <div class="container">
+      <h2 class="section-title reveal">Research & Publications</h2>
+      <div class="projects-grid">
+        
+        <!-- NLP Research -->
+        <div class="project-card reveal stagger-delay-1">
+          <div class="project-header">
+            <h3 class="project-title">POS Tagging to Sentence Structure Malagasy</h3>
+            <span class="project-status">Published</span>
+          </div>
+          <p class="project-description">
+           Malagasy NLP system: Design of part-of-speech tagging tools and analysis of sentence structures. Significant improvement in the accuracy and performance of the system. 
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">NLP</span>
+            <span class="tech-tag">Deep Learning</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Research</span>
+          </div>
+          <div class="research-details">
+            <div class="detail-item">
+              <i class="fas fa-calendar-alt"></i>
+              <span>Dec 2022 - Mar 2024</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-university"></i>
+              <span>LIMAD GlOrE Research Lab</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="project-card reveal stagger-delay-2">
+          <div class="project-header">
+            <h3 class="project-title">Academic Background</h3>
+            <span class="project-status">Completed</span>
+          </div>
+          <p class="project-description">
+            Master's degree in Management Information Systems from the Ecole Nationale d'Informatique.
+            Specialization in Artificial Intelligence and Information Systems with a focus
+            on natural language processing.
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">Research</span>
+            <span class="tech-tag">Academic</span>
+            <span class="tech-tag">Information Systems</span>
+          </div>
+          <div class="education-details">
+            <div class="education-item">
+              <i class="fas fa-graduation-cap"></i>
+              <div>
+                <strong>Master Recherche en Informatique de gestion</strong>
+                <div>École Nationale d'Informatique</div>
+              </div>
+            </div>
+            <!-- <div class="education-item">
+              <i class="fas fa-shield-alt"></i>
+              <div>
+                <strong>Cybersecurity Awareness Certification</strong>
+                <div>United Nations Office on Drugs and Crime (UNODC)</div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
 
   <!-- Impact Section -->
   <section id="impact" class="content-section">
     <div class="container">
-      <h2 class="section-title reveal">Off-Screen Impact & Recognition</h2>
+      <h2 class="section-title reveal">Community & Impact</h2>
       <div class="impact-grid">
+        
         <div class="impact-item reveal stagger-delay-1">
           <div class="impact-year">2023</div>
+          <h3 class="project-title">Educational Workshop Organization</h3>
           <p class="impact-description">
-            Speaker at Odoo Experience: Presented on integrating ML models into Odoo workflows, sharing best practices with 200+ developers and business leaders.
+            Creator of a creative holiday workshop at Saint François Xavier high school with a view to developing imagination and critical thinking in young people.
           </p>
+          <div class="impact-tags">
+            <span class="tech-tag">Education</span>
+            <span class="tech-tag">Youth</span>
+            <span class="tech-tag">Technology</span>
+          </div>
         </div>
+
         <div class="impact-item reveal stagger-delay-2">
-          <div class="impact-year">2022</div>
+          <div class="impact-year">2023</div>
+          <h3 class="project-title">Research Day Outreach & Media Relations</h3>
           <p class="impact-description">
-            Open Source Contributor: Published a suite of reusable Odoo components on GitHub that have been adopted by 50+ developers worldwide.
+            Managed public relations for Research Day 2023, including radio and TV appearances to promote the event and leading outreach campaigns for high school students.
           </p>
+          <div class="impact-tags">
+            <span class="tech-tag">Media Relations</span>
+            <span class="tech-tag">Public Speaking</span>
+            <span class="tech-tag">Community Engagement</span>
+          </div>
         </div>
-        <div class="impact-item reveal stagger-delay-3">
-          <div class="impact-year">2021-Present</div>
+
+        <div class="impact-item reveal staggeray-delay-3">
+          <div class="impact-year">2023</div>
+          <h3 class="project-title">Election Observation</h3>
           <p class="impact-description">
-            Mentorship Program Lead: Regularly mentor aspiring developers from Madagascar, providing guidance on Odoo development and AI applications.
+            Election observation with the Safidy organization during the 2023 presidential election,
+            contributing to the transparency and integrity of the democratic process in Madagascar.
           </p>
+          <div class="impact-tags">
+            <span class="tech-tag">Civic Engagement</span>
+            <span class="tech-tag">Democracy</span>
+            <span class="tech-tag">Transparency</span>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Skills Section -->
-  <section id="skills" class="content-section">
+  <!-- Section Skills -->
+  <section id="skills" class="content-section" style="background: var(--black-light);">
     <div class="container">
-      <h2 class="section-title reveal">Skills & Toolkit</h2>
-      <div class="skills-grid">
-        <div class="skill-category reveal stagger-delay-1">
-          <h4 class="skill-title">Languages</h4>
-          <div class="skill-items">
-            <span class="skill-item">Python</span>
-            <span class="skill-item">JavaScript</span>
-            <span class="skill-item">SQL</span>
-            <span class="skill-item">HTML/CSS</span>
-            <span class="skill-item">XML</span>
+      <h2 class="section-title reveal">Skills & Expertise</h2>
+      
+      <div class="skills-minimalist">
+        <!-- Technical Skills -->
+        <div class="skill-group reveal stagger-delay-1">
+          <h3 class="skill-group-title">
+            <i class="fas fa-code"></i>
+            Technical Stack
+          </h3>
+          <div class="skill-chips">
+            <span class="skill-chip">Odoo</span>
+            <span class="skill-chip">Python</span>
+            <span class="skill-chip">Django</span>
+            <span class="skill-chip">TensorFlow</span>
+            <span class="skill-chip">NLP</span>
+            <span class="skill-chip">Deep Learning</span>
+            <span class="skill-chip">PostgreSQL</span>
+            <span class="skill-chip">Git</span>
+            <span class="skill-chip">Linux</span>
           </div>
         </div>
-        <div class="skill-category reveal stagger-delay-2">
-          <h4 class="skill-title">Frameworks & Odoo</h4>
-          <div class="skill-items">
-            <span class="skill-item">Odoo (v14-17)</span>
-            <span class="skill-item">Django</span>
-            <span class="skill-item">React</span>
-            <span class="skill-item">FastAPI</span>
-            <span class="skill-item">QWeb</span>
+
+        <!-- Development -->
+        <div class="skill-group reveal stagger-delay-2">
+          <h3 class="skill-group-title">
+            <i class="fas fa-laptop-code"></i>
+            Development
+          </h3>
+          <div class="skill-chips">
+            <span class="skill-chip">Web Development</span>
+            <span class="skill-chip">ERP Customization</span>
+            <span class="skill-chip">Database Design</span>
+            <span class="skill-chip">API Integration</span>
+            <span class="skill-chip">Mobile Apps</span>
           </div>
         </div>
-        <div class="skill-category reveal stagger-delay-3">
-          <h4 class="skill-title">AI/ML Stack</h4>
-          <div class="skill-items">
-            <span class="skill-item">TensorFlow</span>
-            <span class="skill-item">PyTorch</span>
-            <span class="skill-item">Scikit-learn</span>
-            <span class="skill-item">Transformers</span>
-            <span class="skill-item">Pandas</span>
-          </div>
-        </div>
-        <div class="skill-category reveal stagger-delay-4">
-          <h4 class="skill-title">DevOps & Tools</h4>
-          <div class="skill-items">
-            <span class="skill-item">Docker</span>
-            <span class="skill-item">Git</span>
-            <span class="skill-item">AWS</span>
-            <span class="skill-item">PostgreSQL</span>
-            <span class="skill-item">Linux</span>
+
+        <!-- Languages -->
+        <div class="skill-group reveal stagger-delay-3">
+          <h3 class="skill-group-title">
+          <i class="fas fa-language"></i>
+            Languages
+          </h3>
+          <div class="skill-chips">
+            <span class="skill-chip">Malagasy - Native</span>
+            <span class="skill-chip">French - Native</span>
+            <span class="skill-chip">English - Beginner (learning)</span>
+            <!-- ... autres -->
           </div>
         </div>
       </div>
     </div>
   </section>
-
+  
   <!-- Punchline Section -->
   <section id="punchline" class="punchline-section">
     <div class="container">
       <div class="hero-divider" style="margin: 0 auto 3rem;"></div>
       <h2 class="punchline-title reveal">And beyond the code...</h2>
       <p class="punchline-text reveal stagger-delay-1">
-        you can find me translating complex tech concepts into guides for developers in my community, and I'm dedicated to mentoring aspiring developers from Madagascar to bridge the digital divide and foster local tech talent.
+         you can find me playing guitar, finding inspiration through Bible study, 
+          or preparing for the next digital innovation challenge in Madagascar. Whether I'm searching for a new purpose, or simply resting... who knows what's next?
+
       </p>
-      <div class="signature reveal stagger-delay-2">- Vatosoa</div>
+      <div class="signature reveal stagger-delay-2">- Vatosoa ☕</div>
     </div>
   </section>
 
@@ -1462,10 +2198,15 @@
   <footer class="footer">
     <div class="container">
       <p class="copyright">
-        &copy; 2026 Vatosoa Razafindrazaka ☕
+        &copy; 2026 Vatosoa Razafindrazaka.  All rights reserved.
       </p>
     </div>
   </footer>
+
+  <!-- Flèche de retour en haut -->
+  <a href="#home" class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </a>
 
   <script>
     // Navigation scroll effect
@@ -1590,6 +2331,91 @@
         });
       });
     });
+
+
+    // Back to top button functionality
+const backToTopButton = document.getElementById('backToTop');
+
+window.addEventListener('scroll', function() {
+  // Existing scroll code...
+  
+  // Show back-to-top button after scrolling down 300px
+  if (window.scrollY > 300) {
+    backToTopButton.classList.add('visible');
+  } else {
+    backToTopButton.classList.remove('visible');
+  }
+});
+
+// Smooth scroll to top when clicked
+backToTopButton.addEventListener('click', function(e) {
+  e.preventDefault();
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+  
+  // Update active state in navbar
+  document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+  document.querySelector('a[href="#home"]').classList.add('active');
+});
+
+
+// Menu mobile functionality
+const mobileToggle = document.getElementById('mobileToggle');
+const navLinks = document.getElementById('navLinks');
+const navOverlay = document.getElementById('navOverlay');
+
+if (mobileToggle && navLinks) {
+  // Ouvrir/fermer le menu mobile
+  mobileToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    navLinks.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+    // Changer l'icône
+    const icon = mobileToggle.querySelector('i');
+    if (navLinks.classList.contains('active')) {
+      icon.classList.remove('fa-bars');
+      icon.classList.add('fa-times');
+      document.body.style.overflow = 'hidden'; // Empêcher le scroll
+    } else {
+      icon.classList.remove('fa-times');
+      icon.classList.add('fa-bars');
+      document.body.style.overflow = ''; // Réactiver le scroll
+    }
+  });
+
+  // Fermer le menu en cliquant sur l'overlay
+  navOverlay.addEventListener('click', () => {
+    navLinks.classList.remove('active');
+    navOverlay.classList.remove('active');
+    mobileToggle.querySelector('i').classList.remove('fa-times');
+    mobileToggle.querySelector('i').classList.add('fa-bars');
+    document.body.style.overflow = '';
+  });
+
+  // Fermer le menu en cliquant sur un lien
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      navOverlay.classList.remove('active');
+      mobileToggle.querySelector('i').classList.remove('fa-times');
+      mobileToggle.querySelector('i').classList.add('fa-bars');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Fermer le menu en appuyant sur Échap
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      navLinks.classList.remove('active');
+      navOverlay.classList.remove('active');
+      mobileToggle.querySelector('i').classList.remove('fa-times');
+      mobileToggle.querySelector('i').classList.add('fa-bars');
+      document.body.style.overflow = '';
+    }
+  });
+}
   </script>
 </body>
 </html>

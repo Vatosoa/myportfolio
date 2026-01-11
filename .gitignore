@@ -1,4 +1,4 @@
-# Python cache files - TOUS les __pycache__
+# Python cache files - ALL __pycache__
 __pycache__/
 *.pyc
 *.pyo
@@ -8,14 +8,14 @@ __pycache__/
 .vscode/
 
 # Virtual environments  
-venv-portfolio-3.12/lib/
+venv-myportolio-3.12/
 myportfolio/lib/
 portfolio_site/lib/
 env/
 venv/
 .venv/
 
-# Django migrations CACHE SEULEMENT
+# Django migrations CACHE ONLY
 */migrations/__pycache__/
 
 # Database
@@ -30,3 +30,90 @@ media/
 # OS
 .DS_Store
 Thumbs.db
+
+# ===== ADDITIONAL STANDARD DJANGO .GITIGNORE ENTRIES =====
+
+# Django specific
+*.log
+*.pot
+local_settings.py
+db.sqlite3-journal
+!media/.gitkeep
+
+# Virtual environment backups
+env.bak/
+venv.bak/
+
+# Python version
+.python-version
+
+# Other IDEs
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+ehthumbs.db
+Desktop.ini
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Cache directories
+.cache/
+
+# Database files (other than SQLite)
+*.sql
+*.sqlite
+
+# Python dependency files
+Pipfile
+Pipfile.lock
+poetry.lock
+
+# Coverage reports
+.coverage
+htmlcov/
+
+# Testing and type checking
+.pytest_cache/
+.mypy_cache/
+.tox/
+
+# Environment variables
+*.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Compiled files
+*.mo
+*.py,cover
+
+# Django packages
+*.egg-info/
+*.egg
+dist/
+build/
+
+# Log files
+logs/
+*.log
+
+# System files
+.directory
+*__pycache__*/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Node modules
+node_modules/
+
+# Generated files
+*.spec
