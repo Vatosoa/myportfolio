@@ -3,9 +3,9 @@ name: Portfolio
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ v0.2 ]
   pull_request:
-    branches: [ dev ]
+    branches: [ v0.2 ]
 
 jobs:
   build-and-deploy:
@@ -47,7 +47,7 @@ jobs:
 
       - name: Configure GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/dev'
+        if: github.ref == 'refs/heads/v0.2'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
