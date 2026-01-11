@@ -7,7 +7,6 @@ on:
   pull_request:
     branches: [ dev ]
 
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -31,28 +30,26 @@ jobs:
       - name: Setup Database
         run: |
           python manage.py migrate
-          python manage.py loaddata initial_data.json  # Si vous avez des fixtures
+          # La ligne suivante est commentée pour éviter l'erreur si le fichier manque
+          # python manage.py loaddata initial_data.json 
 
       - name: Generate Static Site
         env:
           DJANGO_SETTINGS_MODULE: portfolio_site.settings
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: |
+          # Crée le dossier de sortie si votre script ne le fait pas
+          mkdir -p dist 
           python generate_static.py
 
       - name: Configure GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: github.ref == 'refs/heads/dev'
-        # if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages
           force_orphan: true
-          cname: vatosoa.github.io  # Votre domaine GitHub Pages
-
-      - name: Deploy to Netlify (Alternative Pro)
-        if: github.ref == 'refs/heads/main'
-        run: |
-          npm install -g netlify-cli
-          netlify deploy --dir=./dist --prod --auth=${{ secrets.NETLIFY_AUTH_TOKEN }} --site=${{ secrets.NETLIFY_SITE_ID }}
+          # Note: vatosoa.github.io ne fonctionne que si le repo est nommé 'Vatosoa.github.io'
+          # Sinon, utilisez le nom par défaut ou configurez votre domaine.
+          cname: vatosoa.github.io 
