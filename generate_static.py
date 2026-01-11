@@ -29,7 +29,8 @@ def generate_static_site():
     try:
         # Générer le site statique
         print("Génération du site statique...")
-        sys.argv = ['manage.py', 'distill-local', 'dist', '--force']  # 'distill' au lieu de 'distill-local'
+        sys.argv = ['manage.py', 'distill-local', 'dist', '--force', '--collectstatic']
+
         execute_from_command_line(sys.argv)
         
         # Vérifier que la génération a réussi

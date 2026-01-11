@@ -32,14 +32,17 @@ jobs:
           python manage.py migrate
           # La ligne suivante est commentée pour éviter l'erreur si le fichier manque
           # python manage.py loaddata initial_data.json 
-
+            
       - name: Generate Static Site
         env:
           DJANGO_SETTINGS_MODULE: portfolio_site.settings
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: |
-          # Crée le dossier de sortie si votre script ne le fait pas
+          # 1. Rassembler les fichiers statiques dans STATIC_ROOT
+          python manage.py collectstatic --noinput
+          # 2. Créer le dossier de sortie
           mkdir -p dist 
+          # 3. Lancer votre script de génération
           python generate_static.py
 
       - name: Configure GitHub Pages
