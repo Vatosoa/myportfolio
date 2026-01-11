@@ -1,0 +1,56 @@
+# .github/workflows/deploy.yml
+name: Portfolio
+
+on:
+  push:
+    branches: [ preprod ]
+  pull_request:
+    branches: [ preprod ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install django-distill python-decouple pillow
+
+      - name: Setup Database
+        run: |
+          python manage.py migrate
+          python manage.py loaddata initial_data.json  # Si vous avez des fixtures
+
+      - name: Generate Static Site
+        env:
+          DJANGO_SETTINGS_MODULE: portfolio_site.settings
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        run: |
+          python generate_static.py
+
+      - name: Configure GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          force_orphan: true
+          cname: vatosoa.github.io  # Votre domaine GitHub Pages
+
+      - name: Deploy to Netlify (Alternative Pro)
+        if: github.ref == 'refs/heads/main'
+        run: |
+          npm install -g netlify-cli
+          netlify deploy --dir=./dist --prod --auth=${{ secrets.NETLIFY_AUTH_TOKEN }} --site=${{ secrets.NETLIFY_SITE_ID }}

@@ -8,6 +8,7 @@ __pycache__/
 .vscode/
 
 # Virtual environments  
+venv-portfolio-3.12/lib/
 myportfolio/lib/
 portfolio_site/lib/
 env/
