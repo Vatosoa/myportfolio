@@ -11,6 +11,10 @@ def generate_static_site():
     # Configuration Django
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio_site.settings')
     
+    # Force une SECRET_KEY si elle est vide (uniquement pour la génération statique)
+    if not os.environ.get('SECRET_KEY'):
+        os.environ['SECRET_KEY'] = 'django_secret_key'
+    
     # Chemins
     base_dir = Path(__file__).parent
     dist_dir = base_dir / 'dist'
