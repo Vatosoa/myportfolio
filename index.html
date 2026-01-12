@@ -1,0 +1,450 @@
+<!-- templates/base.html -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vatosoa Razafindrazaka</title>
+  <!-- Favicon pour l'onglet du navigateur -->
+  <link rel="icon" href="/myportfolio/static/images/vintage-image.png" type="image/png">
+  <link rel="shortcut icon" href="/myportfolio/static/images/vintage-image.png" type="image/x-icon">
+
+  <!-- Pour les appareils Apple -->
+  <link rel="apple-touch-icon" href="/myportfolio/static/images/vintage-image.png">
+  
+  <!-- NOUVELLES POLICES : Delicious Handrawn, Montserrat, Abril Fatface -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Delicious+Handrawn&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <!-- Font Awesome pour les icônes sociales -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/myportfolio/static/css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-content-wrapper">
+        <div class="nav-links-container" id="navLinks">
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#publications" class="nav-link">Publications</a>
+          <a href="#impact" class="nav-link">Impact</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#punchline" class="nav-link">Beyond</a>
+        </div>
+      </div>
+      <!-- Bouton hamburger pour mobile -->
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <!-- Overlay pour fermer le menu -->
+      <div class="nav-overlay" id="navOverlay"></div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-section">
+    <div class="container">
+      <div class="hero-container">
+        <!-- Colonne image avec icônes sociales pour desktop -->
+        <div class="hero-image-column reveal">
+          <div class="hero-image-container">
+            <img src="/myportfolio/static/images/vintage-image.png"  
+                alt="Portrait of Vatosoa Razafindrazaka" 
+                class="profile-image">
+          </div>
+          <div class="hero-social-links">
+            <a href="https://github.com/Vatosoa" target="_blank" class="social-link" title="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/vatosoa-razafindrazaka/" target="_blank" class="social-link" title="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://x.com/VRazafindrazaka" class="social-link" title="Twitter (X)">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Contenu à droite -->
+        <div class="hero-content reveal stagger-delay-1">
+          <h1 class="hero-title">
+            VATOSOA<br>
+            <span class="title-highlight">RAZAFINDRAZAKA</span>
+          </h1>
+          
+          <!-- Ajoutez ceci dans la section identity-block de votre templates/base.html -->
+           <div class="identity-block">
+            <div class="identity-statement">
+              Odoo Developer & AI Researcher
+            </div>
+            <!-- <div class="identity-subtitle">
+              AI Researcher
+            </div> -->
+          </div>
+          
+          <!-- Version alternative avec badge plus visible -->
+          <p class="hero-description">
+            1.5+ years of Odoo development in Python, with published research in Natural Language Processing for the 
+            <span class="malagasy-badge">
+              Malagasy
+              <!-- <span class="badge-flag"></span> -->
+              <span class="badge-tooltip">
+                Official language of Madagascar
+                <!-- <i class="fas fa-arrow-right"></i> -->
+              </span>
+            </span>
+            language by Springer Nature.
+          </p>
+          
+          <!-- <div class="cta-container">
+            <a href="#projects" class="hero-cta">
+              View Projects
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div> -->
+          
+          <!-- Icônes sociales pour mobile (apparaissent seulement sur mobile) -->
+          <div class="hero-social-links mobile-only">
+            <a href="https://github.com/Vatosoa" target="_blank" class="social-link" title="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/vatosoa-razafindrazaka/" target="_blank" class="social-link" title="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="social-link" title="Twitter (X)">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Élément décoratif -->
+        <div class="hero-decoration">
+          Build with purpose • Design with care
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="content-section">
+    <div class="container">
+      <h2 class="section-title reveal">Projects & Experience</h2>
+      
+      <!-- Timeline Compacte -->
+      <div class="compact-timeline">
+        <!-- Timeline Track -->
+        <div class="timeline-track"></div>
+        
+        <!-- Odoo Experience -->
+        <div class="timeline-milestone reveal stagger-delay-1">
+          <div class="milestone-dot" data-year="2024"></div>
+          <div class="milestone-content">
+            <span class="milestone-date">May 2024 - Present</span>
+            <h3 class="milestone-title">Odoo Development - Odoo Python Developer</h3>
+            <div class="milestone-location">
+              <i class="fas fa-building"></i> Primanet (Advences)
+            </div>
+            <p class="milestone-summary">
+              Development and customization of Odoo modules to meet specific customer needs. 
+              <br>Audit and optimization of existing applications with PostgreSQL.
+              <br>Integration of backend solutions with ColdFusion and SQL Server.
+            </p>
+            <div class="milestone-tags">
+              <span class="milestone-tag">Odoo</span>
+              <span class="milestone-tag">Python ORM</span>
+              <span class="milestone-tag">XML</span>
+              <span class="milestone-tag">ColdFusion</span>
+              <span class="milestone-tag">PostgreSQL</span>
+              <span class="milestone-tag">SQL Server</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- NLP Research -->
+        <div class="timeline-milestone reveal stagger-delay-2">
+          <div class="milestone-dot" data-year="2023"></div>
+          <div class="milestone-content">
+            <span class="milestone-date">Dec 2022 - Mar 2024</span>
+            <h3 class="milestone-title">NLP for Malagasy - Researcher</h3>
+            <div class="milestone-location">
+              <i class="fas fa-graduation-cap"></i> LIMAD GlOrE
+            </div>
+            <p class="milestone-summary">
+              Published research on morphosyntactic tagging in Malagasy sentence structure.
+              <br>Design and implementation of an automatic Malagasy language processing system.
+              <br>Use of deep learning for system performance analysis and improvement. 
+            </p>
+            <div class="milestone-tags">
+              <span class="milestone-tag">Django</span>
+              <span class="milestone-tag">TensorFlow</span>
+              <span class="milestone-tag">Keras</span>
+              <span class="milestone-tag">Scikit-learn</span>
+              <span class="milestone-tag">Matplotlib</span>
+              <span class="milestone-tag">Numpy</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Full-Stack Projects -->
+        <div class="timeline-milestone reveal stagger-delay-3">
+          <div class="milestone-dot" data-year="2020"></div>
+          <div class="milestone-content">
+            <span class="milestone-date">Dec 2019 - Present</span>
+            <h3 class="milestone-title">Full-Stack Dev</h3>
+            <div class="milestone-location">
+              <i class="fas fa-laptop-code"></i> Various Projects
+            </div>
+            <p class="milestone-summary">
+              Development of management applications (students, inventory, thesis defense) with Django, Java Swing, Java FX, AngularJS, Spring Boot, Hibernate, and PostgreSQL.
+              <br>Exporting ERP data to Odoo and designing a sales application for Socolait.
+              <br>Creation of a website using Odoo and a mobile application with FlutterFlow.
+              <br>Audit and optimization of databases, implementation of triggers and customized reports.
+              <br>Development of a Malagasy crossword puzzle application with ReactJS and Django.
+            </p>
+            <div class="milestone-tags">
+              <span class="milestone-tag">Odoo</span>
+              <span class="milestone-tag">Django</span>
+              <span class="milestone-tag">Java</span>
+              <span class="milestone-tag">AngularJS</span>
+              <span class="milestone-tag">ReactJS</span>
+              <span class="milestone-tag">Spring boot</span>
+              <span class="milestone-tag">FlutterFlow</span>
+              <span class="milestone-tag">PostgreSQL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="timeline-milestone reveal stagger-delay-4">
+          <div class="milestone-dot" data-year="2019"></div>
+          <div class="milestone-content">
+            <span class="milestone-date">Ongoing</span>
+            <h3 class="milestone-title">Education</h3>
+            <div class="milestone-location">
+              <i class="fas fa-university"></i> ENI University + UNODC
+            </div>
+            <p class="milestone-summary">
+              Master's degree in Management Information Systems with a specialization in AI and language processing.
+              <br>Certified training in cybercrime awareness by the UNODC.
+            </p>
+            <div class="milestone-tags">
+              <span class="milestone-tag">Research</span>
+              <span class="milestone-tag">AI</span>
+              <span class="milestone-tag">NLP</span>
+              <span class="milestone-tag">Cybersecurity</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research Section -->
+  <section id="publications" class="content-section" style="background: var(--black-light);">
+    <div class="container">
+      <h2 class="section-title reveal">Research & Publications</h2>
+      <div class="projects-grid">
+        
+        <!-- NLP Research -->
+        <div class="project-card reveal stagger-delay-1">
+          <div class="project-header">
+            <h3 class="project-title">POS Tagging to Sentence Structure Malagasy</h3>
+            <span class="project-status">Published</span>
+          </div>
+          <p class="project-description">
+           Malagasy NLP system: Design of part-of-speech tagging tools and analysis of sentence structures. Significant improvement in the accuracy and performance of the system. 
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">NLP</span>
+            <span class="tech-tag">Deep Learning</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Research</span>
+          </div>
+          <div class="research-details">
+            <div class="detail-item">
+              <i class="fas fa-calendar-alt"></i>
+              <span>Dec 2022 - Mar 2024</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-university"></i>
+              <span>LIMAD GlOrE Research Lab</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <!-- <div class="project-card reveal stagger-delay-2">
+          <div class="project-header">
+            <h3 class="project-title">Academic Background</h3>
+            <span class="project-status">Completed</span>
+          </div>
+          <p class="project-description">
+            Master's degree in Management Information Systems from the Ecole Nationale d'Informatique.
+            Specialization in Artificial Intelligence and Information Systems with a focus
+            on natural language processing.
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">Research</span>
+            <span class="tech-tag">Academic</span>
+            <span class="tech-tag">Information Systems</span>
+          </div>
+          <div class="education-details">
+            <div class="education-item">
+              <i class="fas fa-graduation-cap"></i>
+              <div>
+                <strong>Master Recherche en Informatique de gestion</strong>
+                <div>École Nationale d'Informatique</div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Impact Section -->
+  <section id="impact" class="content-section">
+    <div class="container">
+      <h2 class="section-title reveal">Community & Impact</h2>
+      <div class="impact-grid">
+        
+        <div class="impact-item reveal stagger-delay-1">
+          <div class="impact-year">2023</div>
+          <h3 class="project-title">Educational Workshop Organization</h3>
+          <p class="impact-description">
+            Creator of a creative holiday workshop at Saint François Xavier high school with a view to developing imagination and critical thinking in young people.
+          </p>
+          <div class="impact-tags">
+            <span class="tech-tag">Education</span>
+            <span class="tech-tag">Youth</span>
+            <span class="tech-tag">Technology</span>
+          </div>
+        </div>
+
+        <div class="impact-item reveal stagger-delay-2">
+          <div class="impact-year">2023</div>
+          <h3 class="project-title">Research Day Outreach & Media Relations</h3>
+          <p class="impact-description">
+            Managed public relations for Research Day 2023, including radio and TV appearances to promote the event and leading outreach campaigns for high school students.
+          </p>
+          <div class="impact-tags">
+            <span class="tech-tag">Media Relations</span>
+            <span class="tech-tag">Public Speaking</span>
+            <span class="tech-tag">Community Engagement</span>
+          </div>
+        </div>
+
+        <div class="impact-item reveal staggeray-delay-3">
+          <div class="impact-year">2023</div>
+          <h3 class="project-title">Election Observation</h3>
+          <p class="impact-description">
+            Election observation with the Safidy organization during the 2023 presidential election,
+            contributing to the transparency and integrity of the democratic process in Madagascar.
+          </p>
+          <div class="impact-tags">
+            <span class="tech-tag">Civic Engagement</span>
+            <span class="tech-tag">Democracy</span>
+            <span class="tech-tag">Transparency</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Skills -->
+  <section id="skills" class="content-section" style="background: var(--black-light);">
+    <div class="container">
+      <h2 class="section-title reveal">Skills & Expertise</h2>
+      
+      <div class="skills-minimalist">
+        <!-- Technical Skills -->
+        <div class="skill-group reveal stagger-delay-1">
+          <h3 class="skill-group-title">
+            <i class="fas fa-code"></i>
+            Technical Stack
+          </h3>
+          <div class="skill-chips">
+            <span class="skill-chip">Odoo</span>
+            <span class="skill-chip">Python</span>
+            <span class="skill-chip">Django</span>
+            <span class="skill-chip">TensorFlow</span>
+            <span class="skill-chip">NLP</span>
+            <span class="skill-chip">Deep Learning</span>
+            <span class="skill-chip">PostgreSQL</span>
+            <span class="skill-chip">Git</span>
+            <span class="skill-chip">Linux</span>
+          </div>
+        </div>
+
+        <!-- Development -->
+        <div class="skill-group reveal stagger-delay-2">
+          <h3 class="skill-group-title">
+            <i class="fas fa-laptop-code"></i>
+            Development
+          </h3>
+          <div class="skill-chips">
+            <span class="skill-chip">Web Development</span>
+            <span class="skill-chip">ERP Customization</span>
+            <span class="skill-chip">Database Design</span>
+            <span class="skill-chip">API Integration</span>
+            <span class="skill-chip">Mobile Apps</span>
+          </div>
+        </div>
+
+        <!-- Languages -->
+        <div class="skill-group reveal stagger-delay-3">
+          <h3 class="skill-group-title">
+          <i class="fas fa-language"></i>
+            Languages
+          </h3>
+          <div class="skill-chips">
+            <span class="skill-chip">Malagasy - Native</span>
+            <span class="skill-chip">French - Native</span>
+            <span class="skill-chip">English - Beginner (learning)</span>
+            <!-- ... autres -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Punchline Section -->
+  <section id="punchline" class="punchline-section">
+    <div class="container">
+      <div class="hero-divider" style="margin: 0 auto 3rem;"></div>
+      <h2 class="punchline-title reveal">And beyond the code...</h2>
+      <p class="punchline-text reveal stagger-delay-1">
+         you can find me playing guitar, finding inspiration through Bible study, 
+          or preparing for the next digital innovation challenge in Madagascar. Whether I'm searching for a new purpose, or simply resting... who knows what's next?
+
+      </p>
+      <div class="signature reveal stagger-delay-2">- Vatosoa ☕</div>
+    </div>
+  </section>
+
+  <!-- Footer avec icônes Font Awesome -->
+  <footer class="footer">
+    <div class="container">
+      <p class="copyright">
+        &copy; 2026 Vatosoa Razafindrazaka.  All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Flèche de retour en haut -->
+  <a href="#home" class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+<script src="/myportfolio/static/js/script.js"></script>
+
+</body>
+</html>
